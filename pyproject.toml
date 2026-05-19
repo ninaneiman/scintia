@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=77.0.3", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "scintia"
+version = "0.1.0"
+description = "Tools to manage pulsar scintillometry data and models"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+    { name = "Nina Gusinskaia" }
+]
+dependencies = [
+    "numpy",
+    "scipy",
+    "matplotlib",
+    "astropy",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["scintia*"]

@@ -19,12 +19,12 @@ from scipy.sparse.linalg import eigsh
 from scipy.optimize import curve_fit
 import scipy.linalg
 
-import load_data as ld
-import ds_psr as dsa
-import fit_thth as fth
-import models_thth as mth
-import wsrt_fits as wf
-import ththmod as THTH
+from . import load_data as ld
+from . import ds_psr as dsa
+from . import fit_thth as fth
+from . import models_thth as mth
+from . import wsrt_fits as wf
+from . import ththmod as THTH
 
 def plot_fit_results(sp, msp, dic, new_fig=True, ax_y=0.0, myfig=None, plot_thth=False, thth_red=None, fd_lims=[-1.5,1.5], tau_lims=[0,1.25]):
     if new_fig is True:

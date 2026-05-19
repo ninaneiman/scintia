@@ -1,0 +1,16 @@
+README.md
+pyproject.toml
+scintia/__init__.py
+scintia/ds_psr.py
+scintia/fit_thth.py
+scintia/gbt_fits.py
+scintia/get_wsrt_with_ampl.py
+scintia/load_data.py
+scintia/models_thth.py
+scintia/ththmod.py
+scintia/wsrt_fits.py
+scintia.egg-info/PKG-INFO
+scintia.egg-info/SOURCES.txt
+scintia.egg-info/dependency_links.txt
+scintia.egg-info/requires.txt
+scintia.egg-info/top_level.txt

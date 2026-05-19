@@ -13,8 +13,8 @@ from matplotlib.colors import LogNorm
 import matplotlib as mpl
 from scipy.sparse.linalg import eigsh
 from scipy.optimize import curve_fit
-import load_data as ld
-import ththmod as THTH
+from . import load_data as ld
+from . import ththmod as THTH
 #np.seterr(divide='ignore', invalid='ignore')
 
 

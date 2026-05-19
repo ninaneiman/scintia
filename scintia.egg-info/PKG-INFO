@@ -1,0 +1,23 @@
+Metadata-Version: 2.4
+Name: scintia
+Version: 0.1.0
+Summary: Tools to manage pulsar scintillometry data and models
+Author: Nina Gusinskaia
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: numpy
+Requires-Dist: scipy
+Requires-Dist: matplotlib
+Requires-Dist: astropy
+
+# psr_tools
+some tools to manage pulsar scintillometry data and models
+
+
+Load_data.py  - functions to manipulate observed data, mostly to load data from .npz to useful formats
+
+ds_psr.py - functions to manipulate dynamic spectra. In contains class "Spec" and "SecSpec"
+
+fit_thth.py - functions to fit curvatures to dynamic spectra (Based on Daniel Baker's version on scintools https://github.com/DanielTBaker/scintools/tree/master/scintools)
+
+models_thth.py - functions to manipulate models of dynamic spectra (including electric field). Contains "Model" class.

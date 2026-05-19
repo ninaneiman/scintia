@@ -16,14 +16,13 @@ import matplotlib as mpl
 from scipy.sparse.linalg import eigsh
 from scipy.optimize import curve_fit
 
-sys.path.insert(1, '/home/gusinskaia/scintools/scintools')
-import ththmod as THTH
+from . import ththmod as THTH
 np.seterr(divide='ignore', invalid='ignore')
 
-import load_data as ld
-import ds_psr as dsa
-import fit_thth as fth
-import models_thth as mth
+from . import load_data as ld
+from . import ds_psr as dsa
+from . import fit_thth as fth
+from . import models_thth as mth
 
 def fit_wsrt_spec(my_spec, figsize=(5,7.5), spec_pieces='Default', par_lims=[0.5,5.5],
                       pc7=False, pc_overlap=False,load_model=False, eta_ref=None, ref_freq=None, edge=1.4, ntau=512,time_lim=2.0,save_models=False, wnoise=False, d_eff=0.325*u.pc, mean0=True, ind_mean0=True, curv_par='dveff', saveauxname='test_wnoise', chi2_method='Nina', reduced=True, edge_threshold=False, tau_ed=0.25, model_ev=False):
