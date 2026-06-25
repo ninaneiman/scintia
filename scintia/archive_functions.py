@@ -7,6 +7,8 @@ import scipy.linalg
 from numpy.fft import rfft, irfft, fft, ifft
 
 from scipy.optimize import curve_fit
+from . import ds_psr as dsa
+from . import load_data as ld
 
 def rotate_phase(prof, phase):
     """Rotate phase of profile earlier"""
@@ -70,3 +72,10 @@ def align_scale_profile(template, prof):
     amp = np.dot(tz, pz)/np.dot(tz,tz)
     bg = np.mean(prof)-np.mean(rtemp)*amp
     return phase, amp, bg
+
+
+
+
+
+
+
