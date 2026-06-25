@@ -10,6 +10,9 @@ from scipy.optimize import curve_fit
 from . import ds_psr as dsa
 from . import load_data as ld
 
+import astropy
+from astropy import units as u, constants as const
+
 def rotate_phase(prof, phase):
     """Rotate phase of profile earlier"""
     fprof = fft(prof)
@@ -140,3 +143,20 @@ def get_all_pars(f):
     psr_name=F.get_source()
 
     return portrait, spec, DM, coord, psr_name
+
+def plot_portrait(portrait, spec):
+    vmin,vmax=np.percentile(portrait, [0.1,99.9])
+    plt.imshow(portrait, vmin=vmin,vmax=vmax, origin='lower', aspect='auto',
+              extent=[0,1,spec.f[0].value, spec.f[-1].value])
+    plt.xlim(0.2,0.8)
+    plt.ylabel('freq. (MHz)')
+    plt.xlabel('Pulse phase')
+
+def shift_to_middle(portrait):
+    profile=np.mean(portrait, axis=0)
+    peak_arg=np.argmax(profile)
+    print (peak_arg)
+    shift=int(portrait.shape[1]/2)-peak_arg
+    return np.roll(portrait, shift, axis=1)
+
+
