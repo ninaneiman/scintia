@@ -1,6 +1,7 @@
 README.md
 pyproject.toml
 scintia/__init__.py
+scintia/archive_functions.py
 scintia/ds_psr.py
 scintia/fit_thth.py
 scintia/gbt_fits.py

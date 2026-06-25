@@ -75,7 +75,68 @@ def align_scale_profile(template, prof):
 
 
 
+def get_all_pars(f):
+    print (f)
+    psr_name=f.split('/')[4]
+    F = psrchive.Archive_load(f)
+    F.pscrunch()
+    F.dedisperse()
+    F.remove_baseline()
+    d = F.get_data()[:,0,:,:]
+    w = F.get_weights()[:,:]
 
+    mjd_end=F.end_time().in_days()
+    mjd_start=F.start_time().in_days()
+    nchan = d.shape[1]
+    bw = F.get_bandwidth()
+    center_frequency = F.get_centre_frequency()
+    print (center_frequency, bw, d.shape)
+    
+    full_time=(mjd_end-mjd_start)*(24.*3600.)
+    ntbin=full_time/d.shape[0]
+    a_t = (np.arange(d.shape[0]) * ntbin * u.s)
+    a_f = np.linspace(center_frequency-bw/2,center_frequency+bw/2, d.shape[1])*u.MHz
 
+    wdata=d*(w[...,None])
+    #print (wdata)
 
+    portrait=wdata.mean(axis=0)
+    dprof = wdata.mean(axis=(0,1))
 
+    template=dprof
+    t_values = template/np.amax(template)
+    t_phases = np.linspace(0,1,len(t_values),endpoint=False)
+
+    phase, amp, bg = align_scale_profile(t_values, dprof)# t_values is template profile (1-D array)
+    tz = rotate_phase(t_values,phase)
+    tz -= tz.mean()
+    d -= d.mean(axis=-1, keepdims=True)
+    tz_sc=tz*amp+bg
+    variance=np.var(d-tz_sc, axis=-1, keepdims=True)
+    j = np.sum(d*tz_sc, axis=-1)
+    j = np.array(j)
+    all_data=j[w!=0]
+    j[w==0] = np.mean(all_data)
+
+    ns = np.sqrt(np.sum(variance*tz_sc**2, axis=-1))
+    all_noise=ns[w!=0]
+    ns[w==0] = np.mean(all_noise)
+
+    if j.shape[0] <2:
+        j=np.concatenate((j,j*0.9), axis=0)
+        ns = np.concatenate((ns,ns*0.9), axis=0)
+        a_t=np.arange(j.shape[0]) * ntbin * u.s
+        print ('this spec has only one time bin, appending extra bin to be able to plot ss and acf')
+
+    spec=dsa.Spec(I=j, t=a_t, f=a_f, stend=np.array([mjd_start,mjd_end+a_t[-1].to(u.d).value]),
+                  nI=ns, tel='Nancay', psr=psr_name, pad_it=True, npad=3, ns_info='with noise')
+
+    DM=F.get_dispersion_measure()
+    my_coord=F.get_coordinates()
+    radec=my_coord.getRaDec()
+    dec=radec.angle2.getDegrees()
+    ra=radec.angle1.getDegrees()
+    coord=np.array([ra,dec])
+    psr_name=F.get_source()
+
+    return portrait, spec, DM, coord, psr_name
