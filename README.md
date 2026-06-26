@@ -1,5 +1,5 @@
 # psr_tools
-some tools to manage pulsar scintillometry data and models
+Useful tools to manage pulsar scintillometry data and models
 
 
 ## Installation guide:
@@ -11,10 +11,14 @@ pip install -e .
 ```
 ## Brief description of functions and utils
 
-Load_data.py  - functions to manipulate observed data, mostly to load data from .npz to useful formats
+ds_psr.py - functions to manipulate dynamic spectra. In contains classes: "Spec" and "SecSpec"
 
-ds_psr.py - functions to manipulate dynamic spectra. In contains class "Spec" and "SecSpec"
+fit_thth.py - functions to fit curvatures to secondary spectra products (Based on Daniel Baker's version on scintools https://github.com/DanielTBaker/scintools/tree/master/scintools)
 
-fit_thth.py - functions to fit curvatures to dynamic spectra (Based on Daniel Baker's version on scintools https://github.com/DanielTBaker/scintools/tree/master/scintools)
+models_thth.py - functions to manipulate models of dynamic and secondary spectra (e.g. electric field). Contains "Model" class.
 
-models_thth.py - functions to manipulate models of dynamic spectra (including electric field). Contains "Model" class.
+scint_scales.py - functions to measure scintillation bandwidth and timescale from the dynamic spectrum or pulse portrait
+
+Load_data.py  - functions to manipulate observed data, mostly to load dynamic spectra data from .npz to useful formats
+
+gbt_fits.py and wsrt_fits.py - functions to simplify fitting curvatures into GBT and WSRT data specifially
