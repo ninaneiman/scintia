@@ -8,6 +8,7 @@ scintia/gbt_fits.py
 scintia/get_wsrt_with_ampl.py
 scintia/load_data.py
 scintia/models_thth.py
+scintia/scint_scales.py
 scintia/ththmod.py
 scintia/wsrt_fits.py
 scintia.egg-info/PKG-INFO
