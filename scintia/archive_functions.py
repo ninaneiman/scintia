@@ -78,9 +78,8 @@ def align_scale_profile(template, prof):
 
 
 
-def get_all_pars(f):
+def get_all_pars(f,psrname='PSR',template=None):
     print (f)
-    psr_name=f.split('/')[4]
     F = psrchive.Archive_load(f)
     F.pscrunch()
     F.dedisperse()
@@ -105,8 +104,8 @@ def get_all_pars(f):
 
     portrait=wdata.mean(axis=0)
     dprof = wdata.mean(axis=(0,1))
-
-    template=dprof
+    if template is None:
+        template=dprof
     t_values = template/np.amax(template)
     t_phases = np.linspace(0,1,len(t_values),endpoint=False)
 
